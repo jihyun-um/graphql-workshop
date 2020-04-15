@@ -8,6 +8,7 @@ const ArticlesQuery = `
     articles(search: { published: $published }) {
       id
       title
+      isPublished
     }
   }
 `;
@@ -17,6 +18,14 @@ const UsersQuery = `
     users(limit: $limit) {
       id
       name
+    }
+  }
+`;
+
+const PublishArticleMutation = `
+  mutation PublishArticle ($articleId: ID!) {
+    publishArticle(id: $articleId) {
+      id
     }
   }
 `;
@@ -35,8 +44,17 @@ const App = () => {
     setArticles(articles);
   };
 
+  const publishArticle = async (articleId) => {
+    await request(graphqlServerUrl, PublishArticleMutation, {
+      articleId,
+    });
+    fetchArticles();
+  };
+
   const fetchUsers = async () => {
-    const { users } = await request(graphqlServerUrl, UsersQuery, { limit: userLimit });
+    const { users } = await request(graphqlServerUrl, UsersQuery, {
+      limit: userLimit,
+    });
     setUsers(users);
   };
 
@@ -54,7 +72,7 @@ const App = () => {
         <input
           type="checkbox"
           checked={articlePublished}
-          onChange={e => setArticlePublished(e.target.checked)}
+          onChange={(e) => setArticlePublished(e.target.checked)}
         />
         <button onClick={fetchArticles}>Fetch articles</button>
       </div>
@@ -63,7 +81,7 @@ const App = () => {
         <input
           type="text"
           value={userLimit}
-          onChange={e => setUserLimit(parseInt(e.target.value))}
+          onChange={(e) => setUserLimit(parseInt(e.target.value))}
         />
         <button onClick={fetchUsers}>Fetch users</button>
       </div>
@@ -73,7 +91,14 @@ const App = () => {
           <h3>Articles</h3>
           <ul>
             {articles.map((article) => (
-              <li key={article.id}>{article.title}</li>
+              <li key={article.id}>
+                {article.title}
+                {!article.isPublished && (
+                  <button onClick={() => publishArticle(article.id)}>
+                    Publish
+                  </button>
+                )}
+              </li>
             ))}
           </ul>
         </div>
