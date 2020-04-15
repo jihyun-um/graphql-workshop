@@ -1,14 +1,8 @@
 import data from '../data';
+import { filterArticles } from './utils'
 
 const Query = {
-  articles: (_parent, { searchText }) => {
-    if (!searchText) {
-      return data.articles;
-    }
-    return data.articles.filter((article) =>
-      article.title.toLowerCase().includes(searchText.toLowerCase())
-    );
-  },
+  articles: (_parent, { search = {} }) => filterArticles(data.articles, search),
 
   article: (_parent, { id }) =>
     data.articles.find((article) => article.id === id),
