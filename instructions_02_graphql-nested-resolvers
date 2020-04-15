@@ -1,0 +1,19 @@
+[Step 1]
+Modifying the schema
+Add an articles property for the User type which should return an array of articles.
+
+Modifying the resolvers
+In your resolvers object add a User field, and on it add an articles field.
+The articles field should return all the articles by that particular user
+In order to access the current user, use the first argument of the resolver (parent)
+Because the parent will represent a user, the id of that user is parent.id
+
+
+[Step 2]
+Modifying the schema
+Add an author property for the Article type which should return a User type (the author of that article)
+
+Modifying the resolvers
+In your resolvers object add a Article field, and on it add an author field.
+The author field should return the author of the article, which is a User object
+Just search the users array for the user that has the id of parent.authorId

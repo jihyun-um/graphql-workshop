@@ -18,7 +18,17 @@ const resolvers = {
       limit ? data.users.slice(0, limit) : data.users,
 
     user: (_parent, { id }) => data.users.find((user) => user.id === id),
-  }
+  },
+
+  User: {
+    articles: (user) =>
+      data.articles.filter((article) => article.authorId === user.id),
+  },
+
+  Article: {
+    author: (article) =>
+      data.users.find((user) => user.id === article.authorId),
+  },
 };
 
 export default resolvers;
