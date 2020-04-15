@@ -1,0 +1,52 @@
+[Step 1] 
+Add Mutation to the schema
+Add type Mutation {} to the schema
+Add the first createUser mutation
+It should take name and email as arguments and they should be mandatory
+Add Mutation to resolvers
+Add a Mutation property to the resolvers object
+Add a resolver for the createUser mutation
+Using the arguments name and email create a new user, push it in the data.users array, and return it
+Use the uuid library to generate a random id for the user
+If the email is already taken, throw an error
+Hint: use throw new Error("error message here")
+Check if it worked
+Try to run the users query after creating a new user
+Try to create a user with the same email to see if the error will be thrown
+​
+
+[Step 2]
+Modifying schema
+Add a publishArticle mutation to the schema
+It should take id of type ID as an argument
+Add a resolver
+Find the article with the id from the arguments
+If an article is found and is not published, set isPublished to true, and return the article
+If an article is not found throw an error: "Article not found"
+If the article is already published, throw an error: "Article is already published"
+
+
+[Step 3]
+Changing schema
+Create an UserInput input which will have name, email, age, and isEmployed as properties
+Change the createUser mutation in the schema, so instead of accepting name and email it will accept only one argument called user of type UserInput
+Changing resolver
+Refactor the resolver so it accepts a updatedUser argument of type UserInput argument instead of name and email
+Updating user
+Add a updateUser mutation
+It should accept the following arguments:
+id of type ID
+userUpdate of type UserInput
+Adding resolver
+Add a resolver for the updateUser mutation
+If the user with id id isn't found, throw an error
+If the user is found, merge the existing user data with the data provided from userUpdate
+The mutation should return the updated user
+Example usage:
+
+mutation {
+   updateUser(id: "123", userUpdate:{age: 35}){
+     id
+     name
+   }
+}

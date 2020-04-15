@@ -5,6 +5,12 @@ type Query {
   user(id: ID!): User
 }
 
+type Mutation {
+  createUser(input: UserInput): User
+  updateUser(id: ID!, input: UserInput): User
+  publishArticle(id: ID!): Article
+}
+
 type Article {
   id: ID!
   title: String
@@ -22,7 +28,14 @@ type User {
   id: ID!
   name: String
   email: String
-  isEmployed: Boolean
   age: Int
+  isEmployed: Boolean
   articles(search: SearchInput): [Article!]!
+}
+
+input UserInput {
+  name: String
+  email: String
+  age: Int
+  isEmployed: Boolean
 }
