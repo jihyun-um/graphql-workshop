@@ -1,0 +1,20 @@
+type Query {
+  articles(searchText: String): [Article]
+  article(id: ID!): Article
+  users(limit: Int): [User]
+  user(id: ID!): User
+}
+
+type Article {
+  id: ID!
+  title: String
+  body: String
+}
+
+type User {
+  id: ID!
+  name: String
+  email: String
+  isEmployed: Boolean
+  age: Int
+}

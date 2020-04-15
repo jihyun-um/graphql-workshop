@@ -1,0 +1,90 @@
+[Step 1]
+Coding in the browser
+If you're not able to have a local setup, please just fork this CodeSandbox repo and continue working in the browser. Notice that you have to sign in with a GitHub account.
+
+Local Setup
+In order to have a local setup you have to have node.js installed on your machine. You can clone a repo or manually set up the app from scratch.
+
+1. Clone repo
+Clone this repo,
+Install the modules (yarn or npm install)
+Run the start script (yarn start or npm start)
+2. Manual setup
+☣️ If you already cloned the repo, you don't need to do this.
+
+Create a folder for your app
+Run npm init -f to initialize it with a package.json
+Create a src folder
+Create an empty index.js file in the src folder
+Install graphpack in your dev dependencies (npm install graphpack --dev or yarn add graphpack --dev)
+Create a resolvers.js file in the src folder with the following content:
+const resolvers = {
+  Query: {
+    hello: () => 'Hello World!! 👋',
+  }
+};
+​
+export default resolvers;
+​
+Create a schema.graphql file in the src folder with the following content:
+type Query {
+  hello: String
+}
+​
+Add "start": "graphpack" to your npm scripts
+Run npm start or yarn start
+Open localhost:4000 in your browser and try to run this query:
+query {
+  hello
+}
+​
+Enjoy your first GraphQL server 🎊️
+
+
+[Step 2]
+Remove the hello query.
+
+Adding custom types to the schema
+Add a custom Article type in the schema. It should have: id, title, body
+Add a custom User type in the schema. It should have: id, name, email, isEmployed, and age
+The id should be of type ID and marked as a required field
+Adding articles and users queries
+Add two more fields to the Query type: articles and users
+articles should return an array of articles
+users should return an array of users
+Adding fake data
+Create a data.js file
+Copy and paste the contents from this file into data.js
+Adding resolvers
+Now you need to add resolvers for articles and users in resolvers.js
+First, import data from './data'
+Resolve users with data.users
+Resolve articles with data.articles
+Running the query
+Try to run this query in the playground and you should receive a list of articles and users:
+query {
+  articles {
+    body
+    title
+  }
+​
+  users {
+    name
+    email
+  }
+}
+​
+
+[Step 3]
+Add 2 new queries:
+
+article which will accept an id as an argument, and it will return the article with that id
+user which will accept an id as an argument, and it will return the article with that id
+
+
+[Step 4]
+Add a limit argument of type Int to the users query
+If limit is provided, it should limit the number of users which are returned from the query, i.e users(limit:2) should return only 2 users
+Add a searchText option to the articles query
+If it's provided, it should return only the articles that contain the searchText query in the title.
+The search should ignore the letter case. (hint: use toLowerCase)
