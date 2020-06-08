@@ -12,4 +12,4 @@ As a part of React Summit Amsterdam 2020 (Remote Edition), this one-day workshop
 - Updating the store after a mutation
 - Optimistic updates
 
-This project consists of the exercises I've completed during the workshop. The GraphQL exercises are in [/graphql-server](https://github.com/jihyun-um/graphql-workshop/tree/master/graphql-server) and the React exercises are in [/react-app](https://github.com/jihyun-um/graphql-workshop/tree/master/react-app).
+This project consists of the [exercises](https://labs.reactacademy.io/) I've completed during the workshop. The GraphQL exercises are in [/graphql-server](https://github.com/jihyun-um/graphql-workshop/tree/master/graphql-server) and the React exercises are in [/react-app](https://github.com/jihyun-um/graphql-workshop/tree/master/react-app).
